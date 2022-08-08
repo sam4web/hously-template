@@ -1,0 +1,28 @@
+// Flex
+@mixin flex($jc: space-between, $ai: center) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+// Grid
+@mixin grid($gap: 0, $jc: flex-start, $ai: stretch) {
+  display: grid;
+  gap: $gap;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+// Screen size mid
+@mixin screen-mid {
+  @media (max-width: $sc-mid) {
+    @content;
+  }
+}
+
+// Screen size small
+@mixin screen-small {
+  @media (max-width: $sc-small) {
+    @content;
+  }
+}

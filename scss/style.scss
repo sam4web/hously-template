@@ -1,0 +1,410 @@
+@import 'var';
+@import 'mixin';
+@import 'global';
+
+// Container
+.page {
+  @extend %section;
+  @include grid(80px);
+  margin: 80px auto;
+}
+
+// Header
+.header {
+  @extend %section;
+  @include flex;
+  padding-top: 30px;
+  padding-bottom: 15px;
+
+  .logo {
+    flex-grow: 1;
+    cursor: pointer;
+  }
+
+  .nav {
+    @include screen-mid {
+      order: 3;
+    }
+
+    .menu-bar {
+      cursor: pointer;
+
+      .tb {
+        width: 30px;
+        height: 4px;
+        background: $black;
+        border-radius: 30px;
+        display: none;
+        transition: 200ms all linear;
+
+        &:nth-child(2) {
+          margin: 4px 0;
+        }
+
+        @include screen-mid {
+          display: block;
+        }
+      }
+    }
+
+    .menu-bar-active {
+      .tb {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          position: relative;
+          top: -4px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    ul {
+      @include flex;
+      @include screen-mid {
+        display: none;
+      }
+
+      li {
+        padding: 0 17px;
+        transition: $tr-fast;
+
+        #active {
+          color: $brand;
+        }
+      }
+
+      a {
+        display: flex;
+        color: $dark;
+        font-size: 17px;
+
+        &:hover {
+          color: $brand;
+        }
+
+        i {
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .acc {
+    margin: 0 25px;
+
+    .profile {
+      padding: 12px 13px;
+      margin-right: 5px;
+    }
+
+    @include screen-small {
+      display: none;
+    }
+  }
+}
+
+.nav-toggle {
+  display: none;
+  li {
+    text-align: center;
+    padding: 5px 10px;
+    transition: $tr-fast;
+
+    #active {
+      color: $brand;
+    }
+  }
+
+  a {
+    color: $dark;
+    font-size: 18px;
+
+    &:hover {
+      color: $brand;
+    }
+
+    i {
+      padding-left: 5px;
+    }
+  }
+}
+
+.nav-toggle-active {
+  @media (max-width: $sc-small) {
+    display: block;
+  }
+}
+
+// Banner
+.banner {
+  width: 96%;
+  height: 80vh;
+  border-radius: $border-rd-mid;
+  margin: 0 auto;
+  margin-top: 30px;
+  background: linear-gradient(#0000008c, #0000008c), url('../img/banner-bg.jpg');
+  background-position: center;
+  position: relative;
+  background-size: cover;
+
+  div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 10%;
+    @include screen-mid {
+      text-align: center;
+    }
+  }
+
+  h1 {
+    color: $white;
+    line-height: 1.25;
+    margin-bottom: 30px;
+    span {
+      color: $brand;
+    }
+  }
+
+  p {
+    font-size: 20px;
+  }
+}
+
+// About
+.about {
+  @include grid(45px, center, center);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  .img {
+    position: relative;
+    img {
+      border-radius: $border-rd-mid;
+    }
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: $brand;
+      background-color: $white;
+      padding: 30px 33px;
+      border-radius: $border-rd-high;
+      transition: $tr-fast;
+
+      &:hover {
+        cursor: pointer;
+        color: $white;
+        background-color: $brand;
+      }
+    }
+  }
+
+  .content {
+    h2 {
+      margin-bottom: 25px;
+    }
+    p {
+      margin-bottom: 35px;
+    }
+  }
+}
+
+// How
+.how {
+  text-align: center;
+  p {
+    margin-top: 15px;
+  }
+
+  .content {
+    @include grid(55px);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 65px;
+
+    .item {
+      .icon {
+        display: inline-block;
+        border-radius: $border-rd-mid;
+        background-color: #e5e5e5;
+        transform: rotate(45deg);
+        margin-bottom: 25px;
+        transition: $tr-fast;
+        cursor: pointer;
+
+        &:hover {
+          transform: rotate(0deg);
+        }
+
+        i {
+          padding: 30px;
+          color: $brand;
+          font-size: 25px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
+// Featured
+.featured {
+  text-align: center;
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  .content {
+    @include grid(35px);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    margin-top: 65px;
+
+    .item {
+      border-radius: $border-rd-low;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      cursor: pointer;
+      transition: $tr-fast;
+
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
+          rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+          rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px,
+          rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        border-radius: $border-rd-mid;
+
+        img {
+          border-radius: $border-rd-mid $border-rd-mid 0 0;
+        }
+
+        .desc p {
+          color: $brand;
+        }
+      }
+
+      img {
+        border-radius: $border-rd-low $border-rd-low 0 0;
+        transition: $tr-fast;
+      }
+
+      .desc {
+        @include grid(20px, center);
+        text-align: left;
+        padding: 20px;
+
+        p {
+          color: $black;
+          transition: $tr-fast;
+        }
+
+        .col-01 {
+          @include flex();
+          border-top: 2px solid #e5e7eb;
+          border-bottom: 2px solid #e5e7eb;
+          padding: 20px 0;
+
+          i {
+            margin-right: 10px;
+            color: $brand;
+          }
+        }
+
+        .col-02 {
+          @include flex;
+          p {
+            color: $light;
+            margin-bottom: 5px;
+          }
+          .row-01 {
+            span {
+              font-size: 18px;
+              font-weight: 900;
+            }
+          }
+          .row-02 {
+            i {
+              color: #fbbf24;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Contact
+.contact {
+  text-align: center;
+  h2 {
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 30px;
+  }
+  i {
+    padding-right: 5px;
+  }
+}
+
+// Footer
+.footer {
+  background-color: $dark;
+  * {
+    color: $white;
+    font-weight: 100;
+  }
+
+  .content {
+    @extend %section;
+    @include grid(35px);
+    grid-template-columns: repeat(2, auto);
+    padding-top: 85px;
+    padding-bottom: 85px;
+
+    .link {
+      @include grid(35px);
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include screen-mid {
+      grid-template-columns: 1fr;
+      .link {
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      }
+    }
+
+    .item {
+      .title {
+        margin-bottom: 20px;
+      }
+
+      li {
+        padding-top: 15px;
+        transition: $tr-fast;
+        a {
+          transition: $tr-fast;
+        }
+        &:hover,
+        a:hover {
+          color: $light;
+          cursor: pointer;
+        }
+        i {
+          padding-right: 10px;
+        }
+      }
+      .location {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 5px;
+        line-height: 1.4;
+      }
+    }
+  }
+}
